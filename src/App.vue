@@ -16,8 +16,9 @@
       <p>
         You will see pictures showing pairs of geometrical objects. Your task is
         to compare both objects in the pair and decide whether they are the same
-        or different. You will need press button "{{samekey == 'f' ? 'f' : 'j'}}"
-        if you think the objects are the same, and "{{samekey == "f" ? "j" : "f"}}" if you think they are different. Please try to answer as quick and accurately as possible!
+        or different. You must press button 'f' if you think that the objects
+        are {{f_key_string}}; otherwise you press button 'j'.
+        Please try to answer as quick and accurately as possible!
       </p>
       <p>We will practice this first.</p>
     </InstructionScreen>
@@ -97,6 +98,8 @@ import training_trials from '../trials/mr_training_trials.csv';
 import _ from 'lodash';
 
 var same_key = _.sample(['j','f'])
+var f_key_string = same_key == 'f' ? 'the same' : 'different';
+console.log("here same_key:: " + same_key)
 var key_allocation = same_key == 'f' ? {'f': 'same', 'j': 'different'} : {'f': 'different', 'j': 'same'} ;
 
 export default {
@@ -111,8 +114,9 @@ export default {
       // Expose lodash.range to template above
       range : _.range,
       sample : _.sample,
-        key_allocation,
-        same_key
+      f_key_string : f_key_string,
+      key_allocation :  key_allocation,
+      same_key :  same_key
     };
   },
   mounted() {
